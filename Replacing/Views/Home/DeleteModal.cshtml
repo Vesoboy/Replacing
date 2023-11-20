@@ -1,0 +1,31 @@
+﻿@model EncryptedMessage
+
+<form asp-action="deleteModal" asp-controller="home" method="post">
+    <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#delModal-@Model.MessageId">
+        Удалить текст
+    </button>
+
+    <div class="modal fade" id="delModal-@Model.MessageId" tabindex="-1" role="dialog" aria-labelledby="delModalLabel-@Model.MessageId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="delModalLabel-@Model.MessageId">Удалить товар</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+
+                    <p>Удалить текст?</p>
+                    <div class="form-group">
+                        <label asp-for="OriginalMessage" class="control-label">Оригинальное сообщение</label>
+                        <input type="text" asp-for="OriginalMessage" class="form-control" readonly />
+                    </div>
+                    <input asp-for="MessageId" class="d-none" />
+
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" value="Да" class="btn btn-light" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

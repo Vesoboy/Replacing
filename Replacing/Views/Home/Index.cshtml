@@ -1,0 +1,67 @@
+﻿@model IEnumerable<EncryptedMessage>
+@{
+    ViewData["Title"] = "Page";
+}
+
+    <div class="d-flex justify-content-end">
+    <div class="p-1">
+        @await Html.PartialAsync("AddMessage", Model.FirstOrDefault())
+    </div>
+    </div>
+    <div class="d-flex justify-content-end">
+        <div class="p-1">
+        <a asp-controller="Replace" asp-action="ReplaceWord">
+            <button type="button" class="btn btn-primary">Посмотреть алфавит</button>
+        </a>
+        </div>
+    </div>
+    <h2>Текст</h2>
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Оригинальный текст</th>
+                <th scope="col">Зашифрованный текст</th>
+                <th scope="col">Дата и время</th>
+                <th></th>
+            </tr>
+        </thead>
+        <thead>
+            
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="align-middle text-break">@item.OriginalMessage</td>
+                    <td class="align-middle text-break">@item.EncryptedMessageText</td>
+                    <td class="align-middle">@item.ReceivedTime</td>
+                    <td class="align-middle">
+                        <div class="row justify-content-start">
+                            <div class="col-7">
+                                @await Html.PartialAsync("DeleteModal",item)
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </thead>
+    </table>
+}
+else
+{
+    <p>База данных пуста.</p>
+}
+
+@if (Model.Any())
+{
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                    <a class="page-link" href="/Home/Index?page=@i">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+}

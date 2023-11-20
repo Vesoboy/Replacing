@@ -1,0 +1,33 @@
+﻿@model EncryptedMessage
+
+<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#addMessage">
+    Текст для шифрования
+</button>
+
+<div class="modal fade" id="addMessage" tabindex="-1" role="dialog" aria-labelledby="addMessage" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form asp-action="AddMessage" asp-controller="Home" method="post">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="addModalLabelMessage">Добавить категорию</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label asp-for="OriginalMessage" class="control-label">Текст без шифрования</label>
+                        <input type="text" asp-for="OriginalMessage" class="form-control" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" value="Добавить" class="btn btn-light" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#addMessage').on('show.bs.modal', function (e) {
+        $(this).find('input[type=text]').val('');
+    });
+</script>
